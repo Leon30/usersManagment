@@ -1,4 +1,4 @@
-package com.elber.markettuto.domain.dto;
+package com.github.leon30.usersManagment.dto;
 
 public class AuthenticationRequest {
 

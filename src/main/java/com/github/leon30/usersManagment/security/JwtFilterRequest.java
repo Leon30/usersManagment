@@ -1,8 +1,8 @@
-package com.elber.markettuto.web.security.filter;
+package com.github.leon30.usersManagment.security;
 
-import com.elber.markettuto.domain.service.PlatziUserDetailsService;
-import com.elber.markettuto.web.security.JWTUtil;
-import com.elber.markettuto.web.security.SecurityConfig;
+
+import com.github.leon30.usersManagment.service.UserAuthService;
+import com.github.leon30.usersManagment.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContext;
@@ -24,18 +24,20 @@ public class JwtFilterRequest extends OncePerRequestFilter {
     @Autowired
     private JWTUtil jwtUtil;
     @Autowired
-    private PlatziUserDetailsService platziUserDetailsService;
+    private UserAuthService userAuthService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authorizationHaader = request.getHeader("Authorization");
+        System.out.println("test3");
 
         if(authorizationHaader != null && authorizationHaader.startsWith("Bearer")){
+            System.out.println("test4");
             String jwt = authorizationHaader.substring(7);
             String username = jwtUtil.extractUsername(jwt);
 
             if(username != null && SecurityContextHolder.getContext().getAuthentication() == null){
-                UserDetails userDetails = platziUserDetailsService.loadUserByUsername(username);
+                UserDetails userDetails = userAuthService.loadUserByUsername(username);
                 if(jwtUtil.validateToken(jwt, userDetails)){
                     UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(userDetails,null,userDetails.getAuthorities());
                     token.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

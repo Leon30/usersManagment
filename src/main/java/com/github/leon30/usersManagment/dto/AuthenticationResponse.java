@@ -1,18 +1,13 @@
-package com.elber.markettuto.domain.dto;
+package com.github.leon30.usersManagment.dto;
 
-public class AuthenticationResponse{
+import com.github.leon30.usersManagment.security.Token;
+import io.jsonwebtoken.JwtBuilder;
 
-    private String jwt;
+import java.util.Date;
 
-    public String getJwt() {
-        return jwt;
-    }
+public class AuthenticationResponse extends Token {
 
-    public void setJwt(String jwt) {
-        this.jwt = jwt;
-    }
-
-    public AuthenticationResponse(String jwt) {
-        this.jwt = jwt;
+    public AuthenticationResponse(String token, Date exp) {
+        super(token, exp);
     }
 }
