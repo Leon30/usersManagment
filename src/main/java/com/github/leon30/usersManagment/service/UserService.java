@@ -1,6 +1,6 @@
 package com.github.leon30.usersManagment.service;
 
-import com.github.leon30.usersManagment.models.User;
+import com.github.leon30.usersManagment.models.UserImp;
 import com.github.leon30.usersManagment.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +14,12 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    public List<User> findAll(){
+    public List<UserImp> findAll(){
         return userRepository.findAll();
     }
 
-    public Optional<User> getUser(Long id){
-        List<User> users = userRepository.findByDoc(id);
+    public Optional<UserImp> getUser(Long id){
+        List<UserImp> users = userRepository.findByDoc(id);
         if(users.size() > 0) {
             return Optional.of(userRepository.findByDoc(id).get(0));
         }else{
@@ -27,8 +27,8 @@ public class UserService {
         }
     }
 
-    public Optional<User> modifyUser(Long id, User newUser){
-        Optional<User> op = getUser(id);
+    public Optional<UserImp> modifyUser(Long id, UserImp newUser){
+        Optional<UserImp> op = getUser(id);
         if(op.isPresent()){
             newUser.setId(op.get().getId());
             return Optional.of(save(newUser));
@@ -37,7 +37,7 @@ public class UserService {
         }
     }
 
-    public User save(User user){
+    public UserImp save(UserImp user){
         return userRepository.save(user);
     }
 

@@ -46,7 +46,8 @@ public class SecurityConf extends WebSecurityConfigurerAdapter {
         System.out.println("tes2");
         http.cors().and().csrf().disable().authorizeRequests().antMatchers(("/**/authenticate")).permitAll()
                 .anyRequest().authenticated().and().sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS).and().addFilterAfter(jwt, UsernamePasswordAuthenticationFilter.class);
+                .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().addFilterAfter(jwt, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override

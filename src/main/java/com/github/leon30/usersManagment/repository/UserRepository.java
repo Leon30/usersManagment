@@ -1,14 +1,13 @@
 package com.github.leon30.usersManagment.repository;
 
-import com.github.leon30.usersManagment.models.User;
+import com.github.leon30.usersManagment.models.UserImp;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.data.querydsl.QuerydslPredicateExecutor;
 
 import java.util.List;
 
-public interface UserRepository extends MongoRepository<User,String>{
-    List<User> findByDoc(Long doc);
-    List<User> findAll();
+public interface UserRepository extends MongoRepository<UserImp,String>{
+    List<UserImp> findByDoc(Long doc);
+    List<UserImp> findAll();
 
     public long count();
 }

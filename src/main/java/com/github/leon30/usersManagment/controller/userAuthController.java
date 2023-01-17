@@ -2,11 +2,9 @@ package com.github.leon30.usersManagment.controller;
 
 import com.github.leon30.usersManagment.dto.AuthenticationRequest;
 import com.github.leon30.usersManagment.dto.AuthenticationResponse;
-import com.github.leon30.usersManagment.models.User;
 import com.github.leon30.usersManagment.models.UserAuth;
 import com.github.leon30.usersManagment.security.Token;
 import com.github.leon30.usersManagment.service.UserAuthService;
-import com.github.leon30.usersManagment.service.UserService;
 import com.github.leon30.usersManagment.util.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -44,7 +42,7 @@ public class userAuthController {
             UserDetails userDetails = userDetailsService.loadUserByUsername(request.getUsername());
             Token jwt = jwtUtil.generateToken(userDetails);
 
-            return new ResponseEntity<>(new AuthenticationResponse(jwt.token,jwt.expires_in), HttpStatus.OK);
+            return new ResponseEntity<>(new AuthenticationResponse(jwt.getToken(),jwt.getExpires_in()), HttpStatus.OK);
         }catch (BadCredentialsException e){
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }

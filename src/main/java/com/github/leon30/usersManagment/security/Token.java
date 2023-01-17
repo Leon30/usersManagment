@@ -1,16 +1,18 @@
 package com.github.leon30.usersManagment.security;
 
-import io.jsonwebtoken.JwtBuilder;
-
 import java.util.Date;
 
-public class Token {
+public abstract class Token {
 
-    public String token;
-    public Date expires_in;
+    String token;
+    Date expires_in;
 
-    public Token(String token, Date exp) {
-        this.token = token;
-        this.expires_in = exp;
-    }
+    public abstract String getToken();
+
+    public abstract void setToken(String token);
+
+    public abstract Date getExpires_in();
+
+    public abstract void setExpires_in(Date expires_in);
+
 }

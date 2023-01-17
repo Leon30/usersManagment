@@ -1,6 +1,7 @@
 package com.github.leon30.usersManagment.util;
 
 import com.github.leon30.usersManagment.security.Token;
+import com.github.leon30.usersManagment.security.TokenBuilder;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtBuilder;
 import io.jsonwebtoken.Jwts;
@@ -21,7 +22,7 @@ public class JWTUtil {
                 .setIssuedAt(new Date())
                 .setExpiration(exp)
                 .signWith(SignatureAlgorithm.HS256,KEY);
-        return new Token(token.compact(), exp);
+        return TokenBuilder.createToken(token.compact(), exp);
     }
 
     public boolean validateToken(String token, UserDetails userDetails){
